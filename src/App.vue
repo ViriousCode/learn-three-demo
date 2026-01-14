@@ -13,9 +13,9 @@ const AMapKey = '542f62bf5450811afb69970f149a8bc2	'
   <!-- <threeMap class="three" /> -->
   <!-- <TDT class="tdt" :apiKey="tdtApiKey" /> -->
   <!-- <a-map class="amap" :apiKey="AMapKey" /> -->
-  <!-- <ThreeMaterialEffect class="three" /> -->
+  <ThreeMaterialEffect class="three" />
   <!-- <Grass class="three" /> -->
-  <Heatmap class="three" />
+  <!-- <Heatmap class="three" /> -->
 </template>
 
 <style scoped>

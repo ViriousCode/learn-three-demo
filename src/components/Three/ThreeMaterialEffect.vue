@@ -214,7 +214,7 @@ const recording = gui.addFolder('录制')
 recording.add(guiRecordingParams, 'durationInSeconds', 1, 60, 1).name('录制时长(s)')
 recording.add(guiRecordingParams, 'startRecording').name('开始录制')
 const shader = gui.addFolder('Shader')
-for (let i = 1; i <= 10; i++) {
+for (let i = 1; i <= 12; i++) {
   const name = 'changeFS' + i
   guiShaderParams[name] = () => changeFS(`fs${i}`)
   shader.add(guiShaderParams, name).name(`着色器${i}`)

@@ -38,7 +38,7 @@ vec2 map(vec3 p)
 {
     vec3 p2 = p;
     p2.xy -= disp(p.z).xy;
-    p.xy *= rot(sin(p.z+iTime)*(0.1 + prm1*0.05) + iTime*0.09);
+    p.xy *= rot(sin(p.z+uTime)*(0.1 + prm1*0.05) + uTime*0.09);
     float cl = mag2(p2.xy);
     float d = 0.;
     p *= .61;
@@ -47,7 +47,7 @@ vec2 map(vec3 p)
     float dspAmp = 0.1 + prm1*0.2;
     for(int i = 0; i < 5; i++)
     {
-		p += sin(p.zxy*0.75*trk + iTime*trk*.8)*dspAmp;
+		p += sin(p.zxy*0.75*trk + uTime*trk*.8)*dspAmp;
         d -= abs(dot(cos(p), sin(p.yzx))*z);
         z *= 0.57;
         trk *= 1.4;
@@ -113,16 +113,16 @@ vec3 iLerp(in vec3 a, in vec3 b, in float x)
     return clamp(ic,0.,1.);
 }
 
-void mainImage( out vec4 fragColor, in vec2 fragCoord )
+void main()
 {	
-	vec2 q = fragCoord.xy/iResolution.xy;
-    vec2 p = (gl_FragCoord.xy - 0.5*iResolution.xy)/iResolution.y;
-    bsMo = (iMouse.xy - 0.5*iResolution.xy)/iResolution.y;
+	vec2 q = vUv;
+    vec2 p = vUv*2. - 1.;
+    bsMo = (uMouse.xy - 0.5*uResolution.xy)/uResolution.y;
     
-    float time = iTime*3.;
+    float time = uTime*3.;
     vec3 ro = vec3(0,0,time);
     
-    ro += vec3(sin(iTime)*0.5,sin(iTime*1.)*0.,0);
+    ro += vec3(sin(uTime)*0.5,sin(uTime*1.)*0.,0);
         
     float dspAmp = .85;
     ro.xy += disp(ro.z)*dspAmp;
@@ -135,7 +135,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     rightdir = normalize(cross(updir, target));
 	vec3 rd=normalize((p.x*rightdir + p.y*updir)*1. - target);
     rd.xy *= rot(-disp(time + 3.5).x*0.2 + bsMo.x);
-    prm1 = smoothstep(-0.4, 0.4,sin(iTime*0.3));
+    prm1 = smoothstep(-0.4, 0.4,sin(uTime*0.3));
 	vec4 scn = render(ro, rd, time);
 		
     vec3 col = scn.rgb;
@@ -145,5 +145,5 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
     col *= pow( 16.0*q.x*q.y*(1.0-q.x)*(1.0-q.y), 0.12)*0.7+0.3; //Vign
     
-	fragColor = vec4( col, 1.0 );
+	gl_FragColor = vec4( col, 1.0 );
 }
