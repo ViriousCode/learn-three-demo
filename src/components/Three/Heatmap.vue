@@ -3,8 +3,8 @@ import * as THREE from 'three';
 import { onMounted, ref, onUnmounted } from 'vue';
 // 导入 OrbitControls
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import heatmapVS from './shaders/heatmap/heatmap.vert';
-import heatmapFS from './shaders/heatmap/heatmap.frag';
+import heatmapVS from './shaders/Heatmap/heatmap.vert';
+import heatmapFS from './shaders/Heatmap/heatmap.frag';
 
 let renderer: THREE.WebGLRenderer;
 let scene: THREE.Scene;
